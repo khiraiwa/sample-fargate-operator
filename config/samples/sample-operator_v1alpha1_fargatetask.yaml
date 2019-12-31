@@ -3,5 +3,15 @@ kind: FargateTask
 metadata:
   name: fargatetask-sample
 spec:
-  # Add fields here
-  foo: bar
+  region: us-west-2
+  cluster: [ECS クラスター名]
+  count: 2
+  networkConfiguration:
+    awsVpcConfiguration:
+      subnets:
+        - [サブネット ID]
+        - [サブネット ID]
+      securityGroups:
+        - [セキュリティグループ ID]
+      assignPublicIp: DISABLED
+  taskDefinition: [タスク定義の ARN]

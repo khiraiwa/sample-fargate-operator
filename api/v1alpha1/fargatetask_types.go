@@ -19,8 +19,22 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+const (
+	PhaseDone = "DONE"
+)
+
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
+
+type AwsVpcConfiguration struct {
+	Subnets        []string `json:"subnets,omitempty"`
+	SecurityGroups []string `json:"securityGroups,omitempty"`
+	AssignPublicIp string   `json:"assignPublicIp,omitempty"`
+}
+
+type NetworkConfiguration struct {
+	AwsVpcConfiguration AwsVpcConfiguration `json:"awsVpcConfiguration,omitempty"`
+}
 
 // FargateTaskSpec defines the desired state of FargateTask
 type FargateTaskSpec struct {
@@ -28,13 +42,19 @@ type FargateTaskSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of FargateTask. Edit FargateTask_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	Region               string               `json:"region,omitempty"`
+	Cluster              string               `json:"cluster,omitempty"`
+	Count                int64                `json:"count,omitempty"`
+	NetworkConfiguration NetworkConfiguration `json:"networkConfiguration,omitempty"`
+	TaskDefinition       string               `json:"taskDefinition,omitempty"`
 }
 
 // FargateTaskStatus defines the observed state of FargateTask
 type FargateTaskStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+	TaskArns []string `json:"taskArns,omitempty"`
+	Phase    string   `json:"phase,omitempty"`
 }
 
 // +kubebuilder:object:root=true
