@@ -1,0 +1,7 @@
+apiVersion: sample-operator.hiraken.cf/v1alpha1
+kind: FargateTask
+metadata:
+  name: fargatetask-sample
+spec:
+  # Add fields here
+  foo: bar

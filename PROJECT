@@ -1,0 +1,7 @@
+domain: hiraken.cf
+repo: github.com/khiraiwa/sample-fargate-operator
+resources:
+- group: sample-operator
+  kind: FargateTask
+  version: v1alpha1
+version: "2"
